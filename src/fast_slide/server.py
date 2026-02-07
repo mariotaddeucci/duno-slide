@@ -111,22 +111,39 @@ def render_presentation(presentation: Presentation) -> str:
 
 
 class SlideHTTPHandler(SimpleHTTPRequestHandler):
-    html_content: str = ""
+    presentation_path: Path | None = None
 
     def do_GET(self):
-        self.send_response(200)
-        self.send_header("Content-Type", "text/html; charset=utf-8")
-        self.end_headers()
-        self.wfile.write(self.html_content.encode("utf-8"))
+        if self.presentation_path is None:
+            self.send_response(500)
+            self.send_header("Content-Type", "text/plain; charset=utf-8")
+            self.end_headers()
+            self.wfile.write(b"Presentation path not configured.")
+            return
+
+        try:
+            from fast_slide.loader import load_presentation
+
+            presentation = load_presentation(self.presentation_path)
+            html = render_presentation(presentation=presentation)
+            self.send_response(200)
+            self.send_header("Content-Type", "text/html; charset=utf-8")
+            self.end_headers()
+            self.wfile.write(html.encode("utf-8"))
+        except Exception as exc:
+            self.send_response(500)
+            self.send_header("Content-Type", "text/plain; charset=utf-8")
+            self.end_headers()
+            message = f"Failed to load presentation: {exc}"
+            self.wfile.write(message.encode("utf-8"))
 
 
 def serve(
-    presentation: Presentation,
+    file: Path,
     host: str = "localhost",
     port: int = 8765,
 ):
-    html = render_presentation(presentation=presentation)
-    SlideHTTPHandler.html_content = html
+    SlideHTTPHandler.presentation_path = file
 
     server = HTTPServer((host, port), SlideHTTPHandler)
     print(f"Serving presentation at http://{host}:{port}")

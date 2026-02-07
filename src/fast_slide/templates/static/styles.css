@@ -10,7 +10,7 @@
 html, body {
     width: 100%;
     height: 100%;
-    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    font-family: 'JetBrains Mono', monospace;
     font-size: 16px;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
@@ -55,6 +55,21 @@ html, body {
 
 .bg-blue {
     background-color: #64b5f6;
+    color: #1a1a1a;
+}
+
+.bg-indigo {
+    background-color: #6272A4;
+    color: #F8F8F2;
+}
+
+.bg-lavender {
+    background-color: #BD93F9;
+    color: #1a1a1a;
+}
+
+.bg-pink {
+    background-color: #FF79C6;
     color: #1a1a1a;
 }
 
@@ -160,12 +175,36 @@ html, body {
     color: #64b5f6;
 }
 
+.bg-indigo .slide-cover-title-right .panel-left .title {
+    color: #F8F8F2;
+}
+
+.bg-indigo .slide-cover-title-left .panel-right .title {
+    color: #F8F8F2;
+}
+
+.bg-lavender .slide-cover-title-right .panel-left .title {
+    color: #BD93F9;
+}
+
+.bg-lavender .slide-cover-title-left .panel-right .title {
+    color: #BD93F9;
+}
+
+.bg-pink .slide-cover-title-right .panel-left .title {
+    color: #FF79C6;
+}
+
+.bg-pink .slide-cover-title-left .panel-right .title {
+    color: #FF79C6;
+}
+
 .bg-white .slide-cover-title-right .panel-left .title {
-    color: #ffffff;
+    color: #F8F8F2;
 }
 
 .bg-white .slide-cover-title-left .panel-right .title {
-    color: #ffffff;
+    color: #F8F8F2;
 }
 
 /* ===== Default Layout ===== */
@@ -199,7 +238,7 @@ html, body {
     font-size: 2.2rem;
     font-weight: 700;
     color: #f0f0f0;
-    font-style: italic;
+    font-weight: bold;
 }
 
 .slide-default .slide-header .header-icon {
@@ -358,7 +397,6 @@ html, body {
     padding: 12px 20px;
     margin-bottom: 1rem;
     background-color: rgba(0, 0, 0, 0.06);
-    font-style: italic;
     font-size: 1.2rem;
 }
 
@@ -400,7 +438,7 @@ html, body {
     font-size: 2.2rem;
     font-weight: 700;
     color: #f0f0f0;
-    font-style: italic;
+    font-weight: bold;
 }
 
 .slide-summary .slide-header .header-icon {

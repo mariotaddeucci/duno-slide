@@ -194,3 +194,27 @@ content = """
 3. Cada serviço tem seu próprio `banco de dados`
 4. Comunicação interna via **gRPC**
 """
+
+[[slides]]
+layout = "cover_title_left"
+background = "indigo"
+title = "Indigo"
+subtitle = "#6272A4"
+
+[[slides]]
+layout = "default"
+background = "lavender"
+title = "Lavender"
+vertical_align = "center"
+content = """
+Cor de fundo roxa com contraste claro.
+"""
+
+[[slides]]
+layout = "default"
+background = "pink"
+title = "Pink"
+vertical_align = "center"
+content = """
+Cor de fundo rosa com contraste claro.
+"""

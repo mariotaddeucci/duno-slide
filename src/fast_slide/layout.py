@@ -2,7 +2,17 @@ from typing import Annotated, Generic, Literal, TypeVar
 
 from pydantic import BaseModel, Field
 
-TBackgroundColors = Literal["white", "black", "red", "green", "yellow", "blue"]
+TBackgroundColors = Literal[
+    "white",
+    "black",
+    "red",
+    "green",
+    "yellow",
+    "blue",
+    "indigo",
+    "lavender",
+    "pink",
+]
 TLayout = TypeVar("TLayout")
 TAspectRatio = Literal["16:9", "4:3"]
 

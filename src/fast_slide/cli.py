@@ -17,11 +17,9 @@ def host(
     bind: Annotated[str, typer.Option(help="Address to bind to.")] = "localhost",
 ):
     """Serve the presentation in the browser."""
-    from fast_slide.loader import load_presentation
     from fast_slide.server import serve
 
-    presentation = load_presentation(file)
-    serve(presentation, host=bind, port=port)
+    serve(file, host=bind, port=port)
 
 
 @app.command()
