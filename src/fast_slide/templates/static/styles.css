@@ -320,6 +320,11 @@ html, body {
     overflow-x: auto;
 }
 
+.slide-default .slide-content pre.mermaid {
+    background-color: rgb(232 232 232 / 80%);
+    padding: 16px;
+}
+
 .slide-default .slide-content code {
     font-family: 'JetBrains Mono', monospace;
 }
