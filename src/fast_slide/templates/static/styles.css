@@ -25,52 +25,62 @@ html, body {
     overflow: hidden;
     page-break-after: always;
     break-after: page;
+    --slide-bg: transparent;
 }
 
 /* ===== Background Color Classes ===== */
 .bg-white {
     background-color: #ffffff;
     color: #1a1a1a;
+    --slide-bg: #ffffff;
 }
 
 .bg-black {
     background-color: #2d2d2d;
     color: #f0f0f0;
+    --slide-bg: #2d2d2d;
 }
 
 .bg-red {
     background-color: #f28b7d;
     color: #1a1a1a;
+    --slide-bg: #f28b7d;
 }
 
 .bg-green {
     background-color: #81c784;
     color: #1a1a1a;
+    --slide-bg: #81c784;
 }
 
 .bg-yellow {
     background-color: #f5d67a;
     color: #1a1a1a;
+    --slide-bg: #f5d67a;
 }
 
 .bg-blue {
     background-color: #64b5f6;
     color: #1a1a1a;
+    --slide-bg: #64b5f6;
 }
 
 .bg-indigo {
     background-color: #6272A4;
     color: #F8F8F2;
+    --slide-bg: #6272A4;
 }
 
 .bg-lavender {
     background-color: #BD93F9;
     color: #1a1a1a;
+    --slide-bg: #BD93F9;
 }
 
 .bg-pink {
     background-color: #FF79C6;
     color: #1a1a1a;
+    --slide-bg: #FF79C6;
 }
 
 /* ===== Dark Panel ===== */
@@ -237,7 +247,7 @@ html, body {
 .slide-default .slide-header .header-title {
     font-size: 2.2rem;
     font-weight: 700;
-    color: #f0f0f0;
+    color: var(--slide-bg);
     font-weight: bold;
 }
 
@@ -260,7 +270,7 @@ html, body {
 .slide-default .slide-footer .footer-text {
     font-size: 1.4rem;
     font-weight: 700;
-    color: #f0f0f0;
+    color: var(--slide-bg);
 }
 
 .slide-default .slide-footer .footer-icon {
@@ -374,7 +384,7 @@ html, body {
 
 .slide-default .slide-content th {
     background-color: #2d2d2d;
-    color: #f0f0f0;
+    color: var(--slide-bg);
     font-weight: 600;
 }
 
@@ -437,7 +447,7 @@ html, body {
 .slide-summary .slide-header .header-title {
     font-size: 2.2rem;
     font-weight: 700;
-    color: #f0f0f0;
+    color: var(--slide-bg);
     font-weight: bold;
 }
 
@@ -459,7 +469,7 @@ html, body {
 .slide-summary .slide-footer .footer-text {
     font-size: 1.4rem;
     font-weight: 700;
-    color: #f0f0f0;
+    color: var(--slide-bg);
 }
 
 .slide-summary .slide-footer .footer-icon {
