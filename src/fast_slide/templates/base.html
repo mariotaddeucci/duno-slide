@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width={{ slide_width | default(1280) }}">
     <title>{{ title | default("Fast Slide") }}</title>
-    <style>
-{{ highlight_css | safe }}
-    </style>
+    <link rel="stylesheet" href="{{ highlight_css_url }}">
     <style>
 {{ inline_css | safe }}
     </style>
@@ -25,8 +23,8 @@
             {% endif %}
         {% endfor %}
     </div>
+    <script src="{{ highlight_js_url }}"></script>
     <script>
-{{ highlight_js | safe }}
 hljs.highlightAll();
     </script>
 </body>
