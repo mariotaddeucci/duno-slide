@@ -10,6 +10,12 @@ requires-python = ">=3.13"
 dependencies = [
     "jinja2>=3.1.6",
     "pydantic>=2.12.5",
+    "typer>=0.15.0",
+]
+
+[project.optional-dependencies]
+export = [
+    "playwright>=1.40.0",
 ]
 
 [project.scripts]

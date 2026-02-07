@@ -4,6 +4,7 @@ from pydantic import BaseModel, Field
 
 TBackgroundColors = Literal["white", "black", "red", "green", "yellow", "blue"]
 TLayout = TypeVar("TLayout")
+TAspectRatio = Literal["16:9", "4:3"]
 
 
 class BaseSlideLayout(BaseModel, Generic[TLayout]):
@@ -29,8 +30,12 @@ class DefaultSlideLayout(BaseSlideLayout[Literal["default"]]):
 
 
 SlideLayout = Annotated[
-    CoverTitleRightSlideLayout
-    | CoverTitleLeftSlideLayout
-    | DefaultSlideLayout,
+    CoverTitleRightSlideLayout | CoverTitleLeftSlideLayout | DefaultSlideLayout,
     Field(discriminator="layout"),
 ]
+
+
+class Presentation(BaseModel):
+    title: str
+    slides: list[SlideLayout]
+    aspect_ratio: TAspectRatio = "16:9"

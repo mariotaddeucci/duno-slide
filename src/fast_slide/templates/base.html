@@ -2,9 +2,11 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=1024">
+    <meta name="viewport" content="width={{ slide_width | default(1280) }}">
     <title>{{ title | default("Fast Slide") }}</title>
-    <link rel="stylesheet" href="/static/styles.css">
+    <style>
+{{ inline_css | safe }}
+    </style>
 </head>
 <body>
     <div class="presentation">

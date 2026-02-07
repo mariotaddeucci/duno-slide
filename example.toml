@@ -1,0 +1,39 @@
+title = "Demo Presentation"
+aspect_ratio = "16:9"
+
+[[slides]]
+layout = "cover_title_right"
+background = "red"
+title = "A rede"
+subtitle = "e as coisas dando errado!"
+
+[[slides]]
+layout = "cover_title_left"
+background = "yellow"
+title = "Clientes"
+subtitle = "Existem tantos..."
+
+[[slides]]
+layout = "default"
+background = "yellow"
+vertical_align = "center"
+content = "<p>Esta aula <strong>não vai ensinar HTTP em si</strong>. Isso já foi abordado em lives anteriores.</p>"
+footer = "Antes de tudo"
+
+[[slides]]
+layout = "default"
+background = "red"
+title = "Timeouts"
+vertical_align = "top"
+content = """<p>Vamos pensar em um exemplo extremamente simples:</p>
+<pre>import httpx
+
+def get_page_content():
+    return httpx.get('https://httpbin.org/delay/6').text
+
+get_page_content()</pre>
+<p>O que acontece se a resposta não voltar no tempo que esperamos?</p>
+<pre>File "live_http_client/.venv/.../httpx/_transports/default.py",
+    line 118, in map_httpcore_exceptions
+      raise mapped_exc(message) from exc
+httpx.ReadTimeout: timed out</pre>"""
