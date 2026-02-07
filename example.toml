@@ -196,6 +196,27 @@ content = """
 """
 
 [[slides]]
+layout = "default"
+background = "green"
+title = "Diagrama Mermaid"
+vertical_align = "center"
+content = """
+### Fluxo de requisição
+
+```mermaid
+graph LR
+    A[Cliente] -->|HTTP| B(API Gateway)
+    B --> C{Roteamento}
+    C -->|/users| D[User Service]
+    C -->|/orders| E[Order Service]
+    C -->|/products| F[Product Service]
+    D --> G[(Database)]
+    E --> G
+    F --> G
+```
+"""
+
+[[slides]]
 layout = "cover_title_left"
 background = "indigo"
 title = "Indigo"

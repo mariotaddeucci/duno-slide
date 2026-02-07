@@ -1,3 +1,5 @@
+import html
+import re
 import tomllib
 from pathlib import Path
 
@@ -15,13 +17,25 @@ MD_EXTENSIONS = [
 MD_EXTENSION_CONFIGS = {}
 
 
+def _convert_mermaid_blocks(html_str: str) -> str:
+    """Convert fenced mermaid code blocks into Mermaid.js-compatible elements."""
+    pattern = r'<pre><code class="language-mermaid">(.*?)</code></pre>'
+
+    def _unescape(match: re.Match) -> str:
+        content = html.unescape(match.group(1))
+        return f'<pre class="mermaid">{content}</pre>'
+
+    return re.sub(pattern, _unescape, html_str, flags=re.DOTALL)
+
+
 def _render_markdown(text: str) -> str:
     """Convert a markdown string to HTML."""
     md = markdown.Markdown(
         extensions=MD_EXTENSIONS,
         extension_configs=MD_EXTENSION_CONFIGS,
     )
-    return md.convert(text)
+    html_result = md.convert(text)
+    return _convert_mermaid_blocks(html_result)
 
 
 def load_presentation(file_path: str | Path) -> Presentation:
