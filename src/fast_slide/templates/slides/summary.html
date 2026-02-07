@@ -1,0 +1,46 @@
+{# Summary Layout: optional header, grid of items in 2 columns, optional footer #}
+<div class="slide bg-{{ slide.background }}">
+    <div class="slide-summary">
+        <div class="slide-inner">
+            {% if slide.title %}
+            <div class="slide-header">
+                <span class="header-title">{{ slide.title }}</span>
+                <span class="header-icon">🐍</span>
+            </div>
+            {% endif %}
+
+            <div class="slide-summary-grid">
+                <div class="slide-summary-column">
+                    {% for item in slide.left_column_items %}
+                    <div class="slide-summary-item">
+                        <div class="summary-item-title">{{ loop.index }}. {{ item.title }}</div>
+                        {% if item.description %}
+                        <div class="summary-item-description">{{ item.description }}</div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="slide-summary-column">
+                    {% for item in slide.right_column_items %}
+                    <div class="slide-summary-item{% if item.empty %} summary-item-empty{% endif %}">
+                        {% if not item.empty %}
+                        <div class="summary-item-title">{{ loop.index + slide.left_column_items | length }}. {{ item.title }}</div>
+                        {% if item.description %}
+                        <div class="summary-item-description">{{ item.description }}</div>
+                        {% endif %}
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            {% if slide.footer %}
+            <div class="slide-footer">
+                <span class="footer-icon">🐍</span>
+                <span class="footer-text">{{ slide.footer }}</span>
+                <span class="footer-icon">🐍</span>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

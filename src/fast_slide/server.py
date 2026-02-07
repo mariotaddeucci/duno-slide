@@ -9,6 +9,7 @@ from fast_slide.layout import Presentation
 TEMPLATES_DIR = Path(__file__).parent / "templates"
 STATIC_DIR = TEMPLATES_DIR / "static"
 FONTS_DIR = STATIC_DIR / "fonts"
+VENDOR_DIR = STATIC_DIR / "vendor"
 
 ASPECT_RATIOS = {
     "16:9": {"width": 1280, "height": 720},
@@ -69,6 +70,22 @@ def _load_css_with_inlined_fonts(aspect_ratio: str) -> str:
     return font_faces + "\n" + css
 
 
+def _load_highlight_css() -> str:
+    """Load highlight.js CSS from vendor directory."""
+    hljs_css_path = VENDOR_DIR / "github-dark.min.css"
+    if hljs_css_path.exists():
+        return hljs_css_path.read_text(encoding="utf-8")
+    return ""
+
+
+def _load_highlight_js() -> str:
+    """Load highlight.js JavaScript from vendor directory."""
+    hljs_js_path = VENDOR_DIR / "all-hljs.js"
+    if hljs_js_path.exists():
+        return hljs_js_path.read_text(encoding="utf-8")
+    return ""
+
+
 def render_presentation(presentation: Presentation) -> str:
     env = Environment(
         loader=FileSystemLoader(str(TEMPLATES_DIR)),
@@ -77,12 +94,16 @@ def render_presentation(presentation: Presentation) -> str:
     template = env.get_template("base.html")
 
     inline_css = _load_css_with_inlined_fonts(presentation.aspect_ratio)
+    highlight_css = _load_highlight_css()
+    highlight_js = _load_highlight_js()
     dims = ASPECT_RATIOS[presentation.aspect_ratio]
 
     return template.render(
         title=presentation.title,
         slides=presentation.slides,
         inline_css=inline_css,
+        highlight_css=highlight_css,
+        highlight_js=highlight_js,
         aspect_ratio=presentation.aspect_ratio,
         slide_width=dims["width"],
         slide_height=dims["height"],

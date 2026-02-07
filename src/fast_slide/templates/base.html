@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width={{ slide_width | default(1280) }}">
     <title>{{ title | default("Fast Slide") }}</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.min.css">
+    <style>
+{{ highlight_css | safe }}
+    </style>
     <style>
 {{ inline_css | safe }}
     </style>
@@ -18,16 +20,14 @@
                 {% include "slides/cover_title_left.html" %}
             {% elif slide.layout == "default" %}
                 {% include "slides/default.html" %}
+            {% elif slide.layout == "summary" %}
+                {% include "slides/summary.html" %}
             {% endif %}
         {% endfor %}
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/python.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/bash.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/javascript.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/sql.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/yaml.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/json.min.js"></script>
-    <script>hljs.highlightAll();</script>
+    <script>
+{{ highlight_js | safe }}
+hljs.highlightAll();
+    </script>
 </body>
 </html>

@@ -14,6 +14,60 @@ title = "Clientes"
 subtitle = "Existem tantos..."
 
 [[slides]]
+layout = "summary"
+background = "red"
+footer = "Python 3.14"
+
+[[slides.items]]
+title = "Gerais"
+description = "Melhorias, debugers, cores, ..."
+
+[[slides.items]]
+title = "Plataformas"
+description = "Windows, Linux, Mac, ..."
+
+[[slides.items]]
+title = "Bibliotecas"
+description = "pathlib, uuid, zstandard, annotationlib"
+
+[[slides.items]]
+title = "Sintaxe"
+description = "Alterações e coisas novas"
+
+[[slides.items]]
+title = "Interpretador"
+description = "Coisas novas do cpython"
+
+[[slides.items]]
+title = "O que não tem caixa"
+description = "O que não coube em nenhum grupo xD"
+
+[[slides]]
+layout = "summary"
+background = "green"
+title = "Agenda"
+
+[[slides.items]]
+title = "Introdução"
+description = "Contexto e objetivos"
+
+[[slides.items]]
+title = "Arquitetura"
+description = "Design do sistema"
+
+[[slides.items]]
+title = "Implementação"
+description = "Código e exemplos"
+
+[[slides.items]]
+title = "Testes"
+description = "Qualidade e cobertura"
+
+[[slides.items]]
+title = "Deploy"
+description = "Publicação e CI/CD"
+
+[[slides]]
 layout = "default"
 background = "yellow"
 vertical_align = "center"
