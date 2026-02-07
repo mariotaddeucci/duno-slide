@@ -17,7 +17,11 @@ subtitle = "Existem tantos..."
 layout = "default"
 background = "yellow"
 vertical_align = "center"
-content = "<p>Esta aula <strong>não vai ensinar HTTP em si</strong>. Isso já foi abordado em lives anteriores.</p>"
+content = """
+Esta aula **não vai ensinar HTTP em si**. Isso já foi abordado em lives anteriores.
+
+O foco será em como lidar com _erros_ e `timeouts` no mundo real.
+"""
 footer = "Antes de tudo"
 
 [[slides]]
@@ -25,15 +29,114 @@ layout = "default"
 background = "red"
 title = "Timeouts"
 vertical_align = "top"
-content = """<p>Vamos pensar em um exemplo extremamente simples:</p>
-<pre>import httpx
+content = """
+Vamos pensar em um exemplo extremamente simples:
+
+```python
+import httpx
 
 def get_page_content():
     return httpx.get('https://httpbin.org/delay/6').text
 
-get_page_content()</pre>
-<p>O que acontece se a resposta não voltar no tempo que esperamos?</p>
-<pre>File "live_http_client/.venv/.../httpx/_transports/default.py",
+get_page_content()
+```
+
+O que acontece se a resposta não voltar no tempo que esperamos?
+
+```bash
+File "live_http_client/.venv/.../httpx/_transports/default.py",
     line 118, in map_httpcore_exceptions
       raise mapped_exc(message) from exc
-httpx.ReadTimeout: timed out</pre>"""
+httpx.ReadTimeout: timed out
+```
+"""
+
+[[slides]]
+layout = "default"
+background = "green"
+title = "Listas e Tabelas"
+vertical_align = "top"
+content = """
+## Principais protocolos
+
+- **HTTP/HTTPS** — Comunicação web
+- **WebSocket** — Comunicação bidirecional em tempo real
+- **gRPC** — Remote Procedure Call de alta performance
+
+### Comparação
+
+| Protocolo  | Latência | Bidirecional | Uso comum           |
+|------------|----------|--------------|---------------------|
+| HTTP/1.1   | Média    | Não          | APIs REST           |
+| HTTP/2     | Baixa    | Não          | APIs modernas       |
+| WebSocket  | Baixa    | Sim          | Chat, jogos online  |
+| gRPC       | Muito baixa | Sim       | Microserviços       |
+"""
+
+[[slides]]
+layout = "default"
+background = "blue"
+title = "Código Python"
+vertical_align = "top"
+content = """
+### Retry com backoff exponencial
+
+```python
+import httpx
+import time
+
+def fetch_with_retry(url: str, max_retries: int = 3):
+    for attempt in range(max_retries):
+        try:
+            response = httpx.get(url, timeout=5.0)
+            response.raise_for_status()
+            return response.json()
+        except httpx.HTTPError as e:
+            wait = 2 ** attempt
+            print(f"Tentativa {attempt + 1} falhou: {e}")
+            print(f"Aguardando {wait}s antes de tentar novamente...")
+            time.sleep(wait)
+    raise Exception("Todas as tentativas falharam")
+```
+"""
+
+[[slides]]
+layout = "default"
+background = "white"
+title = "Comandos Bash"
+vertical_align = "top"
+content = """
+### Diagnóstico de rede
+
+```bash
+# Testar conectividade
+curl -v https://httpbin.org/get
+
+# Verificar DNS
+dig httpbin.org
+
+# Medir tempo de resposta
+time curl -o /dev/null -s -w '%{time_total}' https://httpbin.org/get
+
+# Monitorar conexões ativas
+ss -tuln | grep :8080
+```
+
+> **Dica:** Use `curl -v` para visualizar os headers completos da requisição e resposta.
+"""
+
+[[slides]]
+layout = "default"
+background = "yellow"
+title = "Imagens e Mídia"
+vertical_align = "center"
+content = """
+### Arquitetura de microserviços
+
+![Diagrama de arquitetura](https://via.placeholder.com/800x300/2d2d2d/f0f0f0?text=Arquitetura+de+Microsservi%C3%A7os)
+
+1. O **API Gateway** recebe a requisição
+2. Roteia para o **serviço correto**
+3. Cada serviço tem seu próprio `banco de dados`
+4. Comunicação interna via **gRPC**
+"""

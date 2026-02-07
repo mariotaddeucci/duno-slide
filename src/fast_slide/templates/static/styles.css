@@ -275,6 +275,100 @@ html, body {
     font-family: 'JetBrains Mono', monospace;
 }
 
+.slide-default .slide-content p code,
+.slide-default .slide-content li code {
+    background-color: rgba(0, 0, 0, 0.12);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+/* highlight.js override */
+.slide-default .slide-content pre code.hljs {
+    background: transparent;
+    padding: 0;
+}
+
+/* Lists */
+.slide-default .slide-content ul,
+.slide-default .slide-content ol {
+    margin-bottom: 1rem;
+    padding-left: 1.8em;
+}
+
+.slide-default .slide-content ul {
+    list-style-type: disc;
+}
+
+.slide-default .slide-content ol {
+    list-style-type: decimal;
+}
+
+.slide-default .slide-content li {
+    font-size: 1.3rem;
+    margin-bottom: 0.4rem;
+    line-height: 1.5;
+}
+
+.slide-default .slide-content ul ul,
+.slide-default .slide-content ol ol,
+.slide-default .slide-content ul ol,
+.slide-default .slide-content ol ul {
+    margin-bottom: 0;
+    margin-top: 0.3rem;
+}
+
+/* Tables */
+.slide-default .slide-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.slide-default .slide-content th,
+.slide-default .slide-content td {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 10px 16px;
+    text-align: left;
+}
+
+.slide-default .slide-content th {
+    background-color: #2d2d2d;
+    color: #f0f0f0;
+    font-weight: 600;
+}
+
+.slide-default .slide-content tr:nth-child(even) td {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Images */
+.slide-default .slide-content img {
+    max-width: 100%;
+    max-height: 400px;
+    border-radius: 8px;
+    object-fit: contain;
+    margin-bottom: 1rem;
+}
+
+/* Blockquotes */
+.slide-default .slide-content blockquote {
+    border-left: 4px solid #2d2d2d;
+    padding: 12px 20px;
+    margin-bottom: 1rem;
+    background-color: rgba(0, 0, 0, 0.06);
+    font-style: italic;
+    font-size: 1.2rem;
+}
+
+/* Horizontal rule */
+.slide-default .slide-content hr {
+    border: none;
+    border-top: 2px solid rgba(0, 0, 0, 0.15);
+    margin: 1rem 0;
+}
+
 /* ===== Print Styles ===== */
 @media print {
     html, body {
