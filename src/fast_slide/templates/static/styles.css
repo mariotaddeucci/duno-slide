@@ -1,0 +1,319 @@
+/* ===== Reset & Base ===== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== Slide Container ===== */
+.slide {
+    width: 1024px;
+    height: 768px;
+    position: relative;
+    overflow: hidden;
+    page-break-after: always;
+    break-after: page;
+}
+
+/* ===== Background Color Classes ===== */
+.bg-white {
+    background-color: #ffffff;
+    color: #1a1a1a;
+}
+
+.bg-black {
+    background-color: #2d2d2d;
+    color: #f0f0f0;
+}
+
+.bg-red {
+    background-color: #f28b7d;
+    color: #1a1a1a;
+}
+
+.bg-green {
+    background-color: #81c784;
+    color: #1a1a1a;
+}
+
+.bg-yellow {
+    background-color: #f5d67a;
+    color: #1a1a1a;
+}
+
+.bg-blue {
+    background-color: #64b5f6;
+    color: #1a1a1a;
+}
+
+/* ===== Dark Panel ===== */
+.dark-panel {
+    background-color: #2d2d2d;
+}
+
+/* ===== Cover Layout (Two Columns) ===== */
+.slide-cover {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    padding: 24px;
+}
+
+.slide-cover .panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 32px;
+    position: relative;
+}
+
+.slide-cover .panel-title {
+    flex: 4;
+}
+
+.slide-cover .panel-subtitle {
+    flex: 6;
+}
+
+.slide-cover .panel-bordered {
+    border: 2px solid rgba(0, 0, 0, 0.25);
+}
+
+.slide-cover .panel .title {
+    font-size: 4.5rem;
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+}
+
+.slide-cover .panel .subtitle {
+    font-size: 2.8rem;
+    font-weight: 400;
+    line-height: 1.15;
+}
+
+/* Title Right: dark left, colored right */
+.slide-cover-title-right .panel-left {
+    background-color: #2d2d2d;
+}
+
+.slide-cover-title-right .panel-left .title {
+    color: inherit;
+}
+
+
+/* Title Left: colored left, dark right */
+.slide-cover-title-left .panel-right {
+    background-color: #2d2d2d;
+}
+
+.slide-cover-title-left .panel-right .title {
+    color: inherit;
+}
+
+
+
+/* Color inheritance for cover panels text */
+.bg-red .slide-cover .panel-left .title,
+.bg-red .slide-cover-title-right .panel-left .title {
+    color: #f28b7d;
+}
+
+.bg-yellow .slide-cover .panel-right .title,
+.bg-yellow .slide-cover-title-left .panel-right .title {
+    color: #f5d67a;
+}
+
+.bg-red .slide-cover-title-left .panel-right .title {
+    color: #f28b7d;
+}
+
+.bg-yellow .slide-cover-title-right .panel-left .title {
+    color: #f5d67a;
+}
+
+.bg-green .slide-cover-title-right .panel-left .title {
+    color: #81c784;
+}
+
+.bg-green .slide-cover-title-left .panel-right .title {
+    color: #81c784;
+}
+
+.bg-blue .slide-cover-title-right .panel-left .title {
+    color: #64b5f6;
+}
+
+.bg-blue .slide-cover-title-left .panel-right .title {
+    color: #64b5f6;
+}
+
+.bg-white .slide-cover-title-right .panel-left .title {
+    color: #ffffff;
+}
+
+.bg-white .slide-cover-title-left .panel-right .title {
+    color: #ffffff;
+}
+
+/* ===== Default Layout ===== */
+.slide-default {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 24px;
+}
+
+.slide-default .slide-inner {
+    flex: 1;
+    border: 2px solid rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* Header bar */
+.slide-default .slide-header {
+    background-color: #2d2d2d;
+    margin-top: 32px;
+    padding: 16px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+}
+
+.slide-default .slide-header .header-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #f0f0f0;
+    font-style: italic;
+}
+
+.slide-default .slide-header .header-icon {
+    font-size: 2rem;
+}
+
+/* Footer bar */
+.slide-default .slide-footer {
+    background-color: #2d2d2d;
+    margin-bottom: 32px;
+    padding: 12px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    flex-shrink: 0;
+}
+
+.slide-default .slide-footer .footer-text {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #f0f0f0;
+}
+
+.slide-default .slide-footer .footer-icon {
+    font-size: 1.5rem;
+}
+
+/* Content area */
+.slide-default .slide-content {
+    flex: 1;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.slide-default .slide-content.align-top {
+    justify-content: flex-start;
+}
+
+.slide-default .slide-content.align-center {
+    justify-content: center;
+}
+
+.slide-default .slide-content.align-bottom {
+    justify-content: flex-end;
+}
+
+.slide-default .slide-content p {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+.slide-default .slide-content strong {
+    font-weight: 700;
+}
+
+/* Code blocks */
+.slide-default .slide-content pre {
+    background-color: #2d2d2d;
+    color: #f0f0f0;
+    padding: 24px;
+    border-radius: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    overflow-x: auto;
+}
+
+.slide-default .slide-content code {
+    font-family: 'JetBrains Mono', monospace;
+}
+
+/* ===== Print Styles ===== */
+@media print {
+    html, body {
+        margin: 0;
+        padding: 0;
+    }
+
+    @page {
+        size: 1024px 768px;
+        margin: 0;
+    }
+
+    .slide {
+        page-break-after: always;
+        break-after: page;
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+
+    .slide:last-child {
+        page-break-after: auto;
+        break-after: auto;
+    }
+}
+
+/* ===== Presentation Container ===== */
+.presentation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    padding: 32px 0;
+    background-color: #e0e0e0;
+}
+
+@media print {
+    .presentation {
+        gap: 0;
+        padding: 0;
+        background-color: transparent;
+    }
+}

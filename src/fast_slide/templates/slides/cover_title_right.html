@@ -1,0 +1,13 @@
+{# Cover Title Right: dark panel left with title, colored panel right with subtitle #}
+<div class="slide bg-{{ slide.background }}">
+    <div class="slide-cover slide-cover-title-right">
+        <div class="panel panel-left panel-title">
+            <div class="title">{{ slide.title }}</div>
+        </div>
+        <div class="panel panel-right panel-subtitle panel-bordered">
+            {% if slide.subtitle %}
+            <div class="subtitle">{{ slide.subtitle }}</div>
+            {% endif %}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1024">
+    <title>{{ title | default("Fast Slide") }}</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="presentation">
+        {% for slide in slides %}
+            {% if slide.layout == "cover_title_right" %}
+                {% include "slides/cover_title_right.html" %}
+            {% elif slide.layout == "cover_title_left" %}
+                {% include "slides/cover_title_left.html" %}
+            {% elif slide.layout == "default" %}
+                {% include "slides/default.html" %}
+            {% endif %}
+        {% endfor %}
+    </div>
+</body>
+</html>
