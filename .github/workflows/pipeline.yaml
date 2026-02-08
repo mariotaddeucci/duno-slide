@@ -54,7 +54,7 @@ jobs:
         run: pip install uv
 
       - name: Execute Build
-        run: uv run task build
+        run: uv build
 
   Publish:
     name: Publish
@@ -78,7 +78,7 @@ jobs:
         run: pip install uv
 
       - name: Build package
-        run: uv run task build
+        run: uv build
 
       - name: Publish package distributions to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
