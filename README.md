@@ -239,7 +239,7 @@ description = "Código e exemplos"
 
 Crie diagramas diretamente no seu slide usando a sintaxe Mermaid:
 
-```toml
+````toml
 [[slides]]
 layout = "default"
 background = "green"
@@ -257,13 +257,13 @@ graph LR
     E --> G
 ```
 """
-```
+````
 
 ### 💻 Syntax Highlighting com GitHub
 
 Todo código é automaticamente destacado usando o tema **GitHub Dark**:
 
-```toml
+````toml
 [[slides]]
 layout = "default"
 background = "blue"
@@ -282,7 +282,7 @@ def fetch_with_retry(url: str, max_retries: int = 3):
     raise Exception("Todas as tentativas falharam")
 ```
 """
-```
+````
 
 **Linguagens suportadas:** Python, JavaScript, Bash, SQL, JSON, YAML, HTML, CSS, e muitas outras!
 
