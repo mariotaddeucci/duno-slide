@@ -95,11 +95,11 @@ O **duno-slide** oferece uma paleta de cores cuidadosamente selecionada para man
 | Cor | Nome | Código Hex | Uso Recomendado |
 |-----|------|------------|-----------------|
 | ⚪ | `white` | `#FFFFFF` | Fundos claros, conteúdo minimalista |
-| ⚫ | `black` | `#282A36` | Fundos escuros, slides finais |
-| 🔴 | `red` | `#FF5555` | Destaques importantes, alertas |
-| 🟢 | `green` | `#50FA7B` | Sucessos, confirmações |
-| 🟡 | `yellow` | `#F1FA8C` | Avisos, atenção |
-| 🔵 | `blue` | `#8BE9FD` | Informações, seções técnicas |
+| ⚫ | `black` | `#2D2D2D` | Fundos escuros, slides finais |
+| 🔴 | `red` | `#F28B7D` | Destaques importantes, alertas |
+| 🟢 | `green` | `#81C784` | Sucessos, confirmações |
+| 🟡 | `yellow` | `#F5D67A` | Avisos, atenção |
+| 🔵 | `blue` | `#64B5F6` | Informações, seções técnicas |
 | 🟣 | `indigo` | `#6272A4` | Títulos alternativos |
 | 🟣 | `lavender` | `#BD93F9` | Slides especiais |
 | 🌸 | `pink` | `#FF79C6` | Destaques suaves |
@@ -337,7 +337,7 @@ Depois acesse: http://localhost:8765
 Este projeto é uma homenagem ao trabalho excepcional do [Eduardo Mendes (dunossauro)](https://github.com/dunossauro) e sua dedicação em compartilhar conhecimento através de suas lives de Python no YouTube.
 
 Se você ainda não conhece o trabalho dele, não deixe de conferir:
-- 📺 [Canal no YouTube - Live de Python](https://www.youtube.com/@Dunossauro)
+- 📺 [Canal no YouTube - Live de Python](https://www.youtube.com/@dunossauro)
 - 🐦 [Twitter/X](https://twitter.com/dunossauro)
 - 💻 [GitHub](https://github.com/dunossauro)
 
