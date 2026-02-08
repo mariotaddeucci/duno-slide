@@ -3,11 +3,36 @@ from typing import Annotated, Optional
 
 import typer
 
+
+def _version_callback(value: bool) -> None:
+    if value:
+        from duno_slide import __version__
+
+        typer.echo(f"duno-slide {__version__}")
+        raise typer.Exit()
+
+
 app = typer.Typer(
     name="duno-slide",
     help="Fast presentations from TOML files.",
     add_completion=False,
 )
+
+
+@app.callback()
+def main(
+    version: Annotated[
+        Optional[bool],
+        typer.Option(
+            "--version",
+            "-v",
+            help="Show the version and exit.",
+            callback=_version_callback,
+            is_eager=True,
+        ),
+    ] = None,
+) -> None:
+    pass
 
 
 @app.command()
