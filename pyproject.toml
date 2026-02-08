@@ -1,5 +1,5 @@
 [project]
-name = "fast-slide"
+name = "duno-slide"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
@@ -20,7 +20,7 @@ export = [
 ]
 
 [project.scripts]
-fast-slide = "fast_slide:main"
+duno-slide = "duno_slide:main"
 
 [build-system]
 requires = ["hatchling"]

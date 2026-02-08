@@ -1,4 +1,4 @@
-from fast_slide.cli import app
+from duno_slide.cli import app
 
 
 def main() -> None:

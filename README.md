@@ -1,2 +1,2 @@
-# fast-slide
+# duno-slide
 

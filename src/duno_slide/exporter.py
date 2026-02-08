@@ -2,8 +2,8 @@ import threading
 from http.server import HTTPServer
 from pathlib import Path
 
-from fast_slide.loader import load_presentation
-from fast_slide.server import ASPECT_RATIOS, SlideHTTPHandler, render_presentation
+from duno_slide.loader import load_presentation
+from duno_slide.server import ASPECT_RATIOS, SlideHTTPHandler, render_presentation
 
 
 def export_presentation(

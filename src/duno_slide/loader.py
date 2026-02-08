@@ -5,7 +5,7 @@ from pathlib import Path
 
 import markdown
 
-from fast_slide.layout import Presentation
+from duno_slide.layout import Presentation
 
 MD_EXTENSIONS = [
     "fenced_code",

@@ -117,7 +117,7 @@ content = """
 - **WebSocket** — Comunicação bidirecional em tempo real
 - **gRPC** — Remote Procedure Call de alta performance
 
-### Comparação
+## Comparação
 
 | Protocolo  | Latência | Bidirecional | Uso comum           |
 |------------|----------|--------------|---------------------|

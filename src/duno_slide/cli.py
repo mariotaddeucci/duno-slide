@@ -4,7 +4,7 @@ from typing import Annotated, Optional
 import typer
 
 app = typer.Typer(
-    name="fast-slide",
+    name="duno-slide",
     help="Fast presentations from TOML files.",
     add_completion=False,
 )
@@ -17,7 +17,7 @@ def host(
     bind: Annotated[str, typer.Option(help="Address to bind to.")] = "localhost",
 ):
     """Serve the presentation in the browser."""
-    from fast_slide.server import serve
+    from duno_slide.server import serve
 
     serve(file, host=bind, port=port)
 
@@ -44,7 +44,7 @@ def export(
     ] = None,
 ):
     """Export the presentation to PDF or PNG images using Playwright."""
-    from fast_slide.exporter import export_presentation
+    from duno_slide.exporter import export_presentation
 
     export_presentation(
         file=file,
@@ -63,8 +63,8 @@ def render(
     ] = Path("presentation.html"),
 ):
     """Render the presentation to a single HTML file."""
-    from fast_slide.loader import load_presentation
-    from fast_slide.server import render_presentation
+    from duno_slide.loader import load_presentation
+    from duno_slide.server import render_presentation
 
     presentation = load_presentation(file)
     html = render_presentation(presentation)

@@ -3,7 +3,7 @@ from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader
 
-from fast_slide.layout import Presentation
+from duno_slide.layout import Presentation
 
 TEMPLATES_DIR = Path(__file__).parent / "templates"
 STATIC_DIR = TEMPLATES_DIR / "static"
@@ -67,7 +67,7 @@ class SlideHTTPHandler(SimpleHTTPRequestHandler):
             return
 
         try:
-            from fast_slide.loader import load_presentation
+            from duno_slide.loader import load_presentation
 
             presentation = load_presentation(self.presentation_path)
             html = render_presentation(presentation=presentation)
