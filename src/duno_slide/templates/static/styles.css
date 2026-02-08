@@ -29,18 +29,6 @@ html, body {
 }
 
 /* ===== Background Color Classes ===== */
-.bg-white {
-    background-color: #ffffff;
-    color: #1a1a1a;
-    --slide-bg: #ffffff;
-}
-
-.bg-black {
-    background-color: #2d2d2d;
-    color: #f0f0f0;
-    --slide-bg: #2d2d2d;
-}
-
 .bg-red {
     background-color: #f28b7d;
     color: #1a1a1a;
@@ -63,12 +51,6 @@ html, body {
     background-color: #64b5f6;
     color: #1a1a1a;
     --slide-bg: #64b5f6;
-}
-
-.bg-indigo {
-    background-color: #6272A4;
-    color: #F8F8F2;
-    --slide-bg: #6272A4;
 }
 
 .bg-lavender {
@@ -185,14 +167,6 @@ html, body {
     color: #64b5f6;
 }
 
-.bg-indigo .slide-cover-title-right .panel-left .title {
-    color: #F8F8F2;
-}
-
-.bg-indigo .slide-cover-title-left .panel-right .title {
-    color: #F8F8F2;
-}
-
 .bg-lavender .slide-cover-title-right .panel-left .title {
     color: #BD93F9;
 }
@@ -207,14 +181,6 @@ html, body {
 
 .bg-pink .slide-cover-title-left .panel-right .title {
     color: #FF79C6;
-}
-
-.bg-white .slide-cover-title-right .panel-left .title {
-    color: #F8F8F2;
-}
-
-.bg-white .slide-cover-title-left .panel-right .title {
-    color: #F8F8F2;
 }
 
 /* ===== Default Layout ===== */

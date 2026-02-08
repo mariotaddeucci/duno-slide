@@ -1,0 +1,362 @@
+title = "duno-slide — Apresentação de Exemplo"
+aspect_ratio = "16:9"
+
+# ── Slide 1: Capa ──────────────────────────────────────────────
+[[slides]]
+layout = "cover_title_right"
+background = "blue"
+title = "duno-slide"
+subtitle = "Apresentações elegantes direto do terminal"
+
+# ── Slide 2: Cores Disponíveis ────────────────────────────────
+[[slides]]
+layout = "default"
+background = "red"
+title = "Cores Disponíveis"
+vertical_align = "top"
+content = """
+### Paleta de cores profissional
+
+| Nome | Descrição | Hex |
+|------|-----------|-----|
+| red | Vermelho | `#EF4444` |
+| green | Verde | `#22C55E` |
+| yellow | Amarelo | `#EAB308` |
+| blue | Azul | `#3B82F6` |
+| lavender | Lavanda | `#C4B5FD` |
+| pink | Rosa | `#EC4899` |
+"""
+
+# ── Slide 3: O que é ───────────────────────────────────────────
+[[slides]]
+layout = "default"
+background = "yellow"
+title = "O que é o duno-slide?"
+vertical_align = "top"
+content = """
+O **duno-slide** é um gerador de apresentações minimalista escrito em Python.
+
+- 📝 Defina seus slides em um arquivo **TOML**
+- 🎨 Escolha entre **6 cores** de fundo
+- 📊 Suporte nativo a **Mermaid**, **tabelas** e **syntax highlighting**
+- ⚡ CLI moderna com **Typer** — rode direto do terminal
+
+```bash
+uvx --from 'duno-slide @ git+https://github.com/mariotaddeucci/duno-slide' duno-slide sample
+```
+"""
+
+# ── Slide 4: Instalação ───────────────────────────────────────
+[[slides]]
+layout = "default"
+background = "green"
+title = "Instalação"
+vertical_align = "top"
+content = """
+### Via uvx (sem instalar nada)
+
+```bash
+uvx --from 'duno-slide @ git+https://github.com/mariotaddeucci/duno-slide' duno-slide host minha_apresentacao.toml
+```
+
+### Via pip
+
+```bash
+pip install duno-slide
+```
+
+### Com suporte a exportação (PDF/PNG)
+
+```bash
+pip install duno-slide[export]
+playwright install chromium
+```
+"""
+
+# ── Slide 5: Comandos CLI ─────────────────────────────────────
+[[slides]]
+layout = "summary"
+background = "blue"
+title = "Comandos da CLI"
+
+[[slides.items]]
+title = "host"
+description = "Serve a apresentação no navegador"
+
+[[slides.items]]
+title = "render"
+description = "Gera um HTML standalone"
+
+[[slides.items]]
+title = "export"
+description = "Exporta para PDF ou PNG"
+
+[[slides.items]]
+title = "sample"
+description = "Roda esta apresentação de exemplo"
+
+# ── Slide 6: Estrutura TOML ───────────────────────────────────
+[[slides]]
+layout = "default"
+background = "yellow"
+title = "Estrutura do arquivo TOML"
+vertical_align = "top"
+content = """
+```toml
+title = "Minha Apresentação"
+aspect_ratio = "16:9"
+
+[[slides]]
+layout = "cover_title_right"
+background = "red"
+title = "Título 1"
+subtitle = "Subtítulo 2"
+
+[[slides]]
+layout = "default"
+background = "blue"
+title = "Conteúdo"
+content = \"\"\"
+Seu conteúdo em **Markdown** aqui!
+\"\"\"
+footer = "Rodapé personalizado"
+```
+"""
+
+# ── Slide 7: Layouts disponíveis ──────────────────────────────
+[[slides]]
+layout = "summary"
+background = "blue"
+title = "Layouts disponíveis"
+
+[[slides.items]]
+title = "cover_title_right"
+description = "Capa com título à direita"
+
+[[slides.items]]
+title = "cover_title_left"
+description = "Capa com título à esquerda"
+
+[[slides.items]]
+title = "default"
+description = "Slide padrão com Markdown"
+
+[[slides.items]]
+title = "summary"
+description = "Sumário em duas colunas"
+
+# ── Slide 8: Comparação de Formatos ───────────────────────────
+[[slides]]
+layout = "default"
+background = "green"
+title = "Comparação de Formatos"
+vertical_align = "center"
+content = """
+| Formato   | Interativo | Offline | Customizável |
+|-----------|------------|---------|--------------|
+| duno-slide | ✅         | ✅      | ✅           |
+| PowerPoint | ❌         | ✅      | ✅           |
+| Google Slides | ✅      | ❌      | ⚠️           |
+| reveal.js  | ✅         | ✅      | ⚠️           |
+"""
+
+# ── Slide 8.5: Recursos Markdown ──────────────────────────────
+[[slides]]
+layout = "default"
+background = "pink"
+vertical_align = "top"
+content = """
+### Lista de recursos
+
+- **Markdown** completo com negrito, itálico e `código inline`
+- Listas ordenadas e não ordenadas
+- Blocos de código com syntax highlighting
+- Imagens e links
+- Tabelas com formatação automática
+- Diagramas Mermaid integrados
+
+> **Dica:** duno-slide combina simplicidade com poder!
+"""
+footer = "Recursos"
+
+# ── Slide 8: Diagrama Mermaid ─────────────────────────────────
+[[slides]]
+layout = "default"
+background = "lavender"
+title = "Diagrama Mermaid"
+vertical_align = "center"
+content = """
+### Fluxo de uma apresentação
+
+```mermaid
+graph LR
+    A[Arquivo TOML] -->|duno-slide| B(Servidor Local)
+    B --> C{Navegador}
+    A -->|render| D[HTML Standalone]
+    A -->|export| E[PDF / PNG]
+    C -->|Apresentar| F[🎉 Sucesso]
+```
+"""
+
+# ── Slide 10: Código com Syntax Highlighting ───────────────────
+[[slides]]
+layout = "default"
+background = "blue"
+title = "Syntax Highlighting"
+vertical_align = "top"
+content = """
+### Python
+
+```python
+from pathlib import Path
+import tomllib
+
+def load_slides(path: str) -> dict:
+    \"\"\"Carrega slides a partir de um arquivo TOML.\"\"\"
+    content = Path(path).read_bytes()
+    data = tomllib.loads(content.decode())
+    return data.get("slides", [])
+
+slides = load_slides("minha_apresentacao.toml")
+for slide in slides:
+    print(f"Layout: {slide['layout']}")
+```
+"""
+
+# ── Slide 11: Syntax Highlighting em Múltiplas Linguagens ────────────────────
+[[slides]]
+layout = "default"
+background = "red"
+vertical_align = "top"
+content = """
+### JavaScript
+
+```javascript
+const loadSlides = async (path) => {
+  const response = await fetch(path);
+  const data = await response.json();
+  return data.slides.filter(slide => slide.layout === "default");
+};
+
+document.addEventListener("DOMContentLoaded", async () => {
+  const slides = await loadSlides("slides.json");
+  slides.forEach(slide => console.log(slide.title));
+});
+```
+"""
+# ── Slide 12: TOML ────────────────────────────────────────────────────
+[[slides]]
+layout = "default"
+background = "pink"
+title = "TOML"
+vertical_align = "center"
+content = """
+```toml
+[presentation]
+title = "duno-slide"
+aspect_ratio = "16:9"
+
+[[slides]]
+layout = "default"
+background = "blue"
+title = "Meu Slide"
+content = \"\"\"
+Conteúdo em **Markdown**
+\"\"\"
+```
+"""
+
+# ── Slide 13: YAML ────────────────────────────────────────────────────────────────
+[[slides]]
+layout = "default"
+background = "green"
+title = "YAML"
+vertical_align = "center"
+content = """
+```yaml
+presentation:
+  title: duno-slide
+  aspect_ratio: 16:9
+slides:
+  - layout: default
+    background: blue
+```
+"""
+
+# ── Slide 14: JSON ───────────────────────────────────────────────────────────────
+[[slides]]
+layout = "default"
+background = "yellow"
+title = "JSON"
+vertical_align = "center"
+content = """
+```json
+{
+  "presentation": {
+    "title": "duno-slide"
+  },
+  "slides": [
+    {
+      "title": "Meu Slide",
+      "content": "Conteúdo em **Markdown**"
+    }
+  ]
+}
+```
+"""
+
+# ── Slide: Footer (sem título) ───────────────────────────────
+[[slides]]
+layout = "default"
+background = "yellow"
+vertical_align = "center"
+content = """
+### O campo `footer` adiciona um rodapé ao slide
+
+Qualquer slide do tipo **default** ou **summary** pode ter um rodapé personalizado.
+
+```toml
+[[slides]]
+layout = "default"
+background = "yellow"
+footer = "Texto do rodapé"
+```
+"""
+footer = "Com footer"
+
+# ── Slide: Summary de Funcionalidades ──────────────────────────
+[[slides]]
+layout = "summary"
+background = "red"
+title = "Funcionalidades"
+
+[[slides.items]]
+title = "TOML simples"
+description = "Sem complicação, sem código"
+
+[[slides.items]]
+title = "6 cores"
+description = "Paleta profissional e consistente"
+
+[[slides.items]]
+title = "4 layouts"
+description = "Cover, Default, Summary"
+
+[[slides.items]]
+title = "Mermaid"
+description = "Diagramas integrados"
+
+[[slides.items]]
+title = "Export"
+description = "PDF e PNG via Playwright"
+
+[[slides.items]]
+title = "Hot reload"
+description = "Atualização automática no navegador"
+
+# ── Slide final ───────────────────────────────────────────────
+[[slides]]
+layout = "cover_title_left"
+background = "lavender"
+title = "Obrigado!"
+subtitle = "mariotaddeucci/duno-slide"

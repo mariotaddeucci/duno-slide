@@ -14,61 +14,80 @@ def _version_callback(value: bool) -> None:
 
 app = typer.Typer(
     name="duno-slide",
-    help="Fast presentations from TOML files.",
+    help="Apresentações elegantes a partir de arquivos TOML.",
     add_completion=False,
+    invoke_without_command=True,
 )
 
 
 @app.callback()
 def main(
+    ctx: typer.Context,
     version: Annotated[
         Optional[bool],
         typer.Option(
             "--version",
             "-v",
-            help="Show the version and exit.",
+            help="Mostra a versão e sai.",
             callback=_version_callback,
             is_eager=True,
         ),
     ] = None,
 ) -> None:
-    pass
+    if ctx.invoked_subcommand is None:
+        typer.echo(ctx.get_help())
 
 
 @app.command()
 def host(
-    file: Annotated[Path, typer.Argument(help="Path to the presentation TOML file.")],
-    port: Annotated[int, typer.Option(help="Port to serve on.")] = 8765,
-    bind: Annotated[str, typer.Option(help="Address to bind to.")] = "localhost",
+    file: Annotated[
+        Path, typer.Argument(help="Caminho do arquivo TOML da apresentação.")
+    ],
+    port: Annotated[int, typer.Option(help="Porta para servir.")] = 8765,
+    bind: Annotated[str, typer.Option(help="Endereço para bind.")] = "localhost",
 ):
-    """Serve the presentation in the browser."""
+    """Serve a apresentação no navegador."""
     from duno_slide.server import serve
 
     serve(file, host=bind, port=port)
 
 
 @app.command()
+def sample(
+    port: Annotated[int, typer.Option(help="Porta para servir.")] = 8765,
+    bind: Annotated[str, typer.Option(help="Endereço para bind.")] = "localhost",
+):
+    """Serve a apresentação de exemplo embutida."""
+    from duno_slide.server import serve
+
+    sample_file = Path(__file__).parent / "sample.toml"
+    serve(sample_file, host=bind, port=port)
+
+
+@app.command()
 def export(
-    file: Annotated[Path, typer.Argument(help="Path to the presentation TOML file.")],
+    file: Annotated[
+        Path, typer.Argument(help="Caminho do arquivo TOML da apresentação.")
+    ],
     output: Annotated[
-        Path, typer.Option("--output", "-o", help="Output file path.")
+        Path, typer.Option("--output", "-o", help="Caminho do arquivo de saída.")
     ] = Path("presentation.pdf"),
     format: Annotated[
         str,
         typer.Option(
             "--format",
             "-f",
-            help="Export format: pdf or png.",
+            help="Formato de exportação: pdf ou png.",
         ),
     ] = "pdf",
     width: Annotated[
-        Optional[int], typer.Option(help="Override viewport width.")
+        Optional[int], typer.Option(help="Largura customizada da viewport.")
     ] = None,
     height: Annotated[
-        Optional[int], typer.Option(help="Override viewport height.")
+        Optional[int], typer.Option(help="Altura customizada da viewport.")
     ] = None,
 ):
-    """Export the presentation to PDF or PNG images using Playwright."""
+    """Exporta a apresentação para PDF ou imagens PNG usando Playwright."""
     from duno_slide.exporter import export_presentation
 
     export_presentation(
@@ -82,16 +101,18 @@ def export(
 
 @app.command()
 def render(
-    file: Annotated[Path, typer.Argument(help="Path to the presentation TOML file.")],
+    file: Annotated[
+        Path, typer.Argument(help="Caminho do arquivo TOML da apresentação.")
+    ],
     output: Annotated[
-        Path, typer.Option("--output", "-o", help="Output HTML file path.")
+        Path, typer.Option("--output", "-o", help="Caminho do arquivo HTML de saída.")
     ] = Path("presentation.html"),
 ):
-    """Render the presentation to a single HTML file."""
+    """Renderiza a apresentação em um arquivo HTML único."""
     from duno_slide.loader import load_presentation
     from duno_slide.server import render_presentation
 
     presentation = load_presentation(file)
     html = render_presentation(presentation)
     output.write_text(html, encoding="utf-8")
-    typer.echo(f"Saved to {output}")
+    typer.echo(f"Salvo em {output}")
