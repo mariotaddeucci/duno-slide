@@ -40,7 +40,9 @@ def main(
 
 @app.command()
 def host(
-    file: Annotated[Path, typer.Argument(help="Caminho do arquivo TOML da apresentação.")],
+    file: Annotated[
+        Path, typer.Argument(help="Caminho do arquivo TOML da apresentação.")
+    ],
     port: Annotated[int, typer.Option(help="Porta para servir.")] = 8765,
     bind: Annotated[str, typer.Option(help="Endereço para bind.")] = "localhost",
 ):
@@ -64,7 +66,9 @@ def sample(
 
 @app.command()
 def export(
-    file: Annotated[Path, typer.Argument(help="Caminho do arquivo TOML da apresentação.")],
+    file: Annotated[
+        Path, typer.Argument(help="Caminho do arquivo TOML da apresentação.")
+    ],
     output: Annotated[
         Path, typer.Option("--output", "-o", help="Caminho do arquivo de saída.")
     ] = Path("presentation.pdf"),
@@ -97,7 +101,9 @@ def export(
 
 @app.command()
 def render(
-    file: Annotated[Path, typer.Argument(help="Caminho do arquivo TOML da apresentação.")],
+    file: Annotated[
+        Path, typer.Argument(help="Caminho do arquivo TOML da apresentação.")
+    ],
     output: Annotated[
         Path, typer.Option("--output", "-o", help="Caminho do arquivo HTML de saída.")
     ] = Path("presentation.html"),
