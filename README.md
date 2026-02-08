@@ -12,6 +12,7 @@
 - 🎨 **6 cores**: Paleta profissional e elegante
 - 📊 **Mermaid**: Diagramas integrados
 - 💻 **Syntax highlighting**: GitHub Dark theme automático
+- 📐 **Sistema de Grid**: Organize conteúdo em layouts flexíveis
 - ⚡ **CLI moderna**: Com Typer
 - 📱 **Responsivo**: 16:9 e 4:3
 
@@ -131,6 +132,58 @@ description = "Descrição"
 [[slides.items]]
 title = "Tópico 2"
 ```
+
+---
+
+## 📐 Sistema de Grid
+
+Organize conteúdo em layouts de grid flexíveis (semelhante ao Material MkDocs):
+
+### Grid de 2 colunas (padrão)
+
+```toml
+[[slides]]
+layout = "default"
+background = "blue"
+title = "Grid Exemplo"
+content = """
+::: grid
+::: card
+### Coluna 1
+- Item A
+- Item B
+:::
+::: card
+### Coluna 2
+- Item X
+- Item Y
+:::
+:::
+"""
+```
+
+### Grid de 3 ou 4 colunas
+
+```toml
+content = """
+::: grid cols-3
+::: card
+**Recurso 1**
+Descrição
+:::
+::: card
+**Recurso 2**
+Descrição
+:::
+::: card
+**Recurso 3**
+Descrição
+:::
+:::
+"""
+```
+
+Suporta `cols-1`, `cols-2`, `cols-3` e `cols-4`. Cada card pode conter qualquer conteúdo Markdown: títulos, listas, código, etc.
 
 ---
 
