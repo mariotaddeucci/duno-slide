@@ -3,13 +3,10 @@ from typing import Annotated, Generic, Literal, TypeVar
 from pydantic import BaseModel, Field
 
 TBackgroundColors = Literal[
-    "white",
-    "black",
     "red",
     "green",
     "yellow",
     "blue",
-    "indigo",
     "lavender",
     "pink",
 ]
