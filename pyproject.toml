@@ -1,6 +1,6 @@
 [project]
 name = "duno-slide"
-version = "0.1.0"
+dynamic = ["version"]
 description = "Add your description here"
 readme = "README.md"
 authors = [
@@ -23,5 +23,22 @@ export = [
 duno-slide = "duno_slide:main"
 
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling", "hatch-vcs"]
 build-backend = "hatchling.build"
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.build.hooks.vcs]
+version-file = "src/duno_slide/_version.py"
+
+[dependency-groups]
+dev = [
+    "pyrefly>=0.51.2",
+    "ruff>=0.15.0",
+    "taskipy>=1.14.1",
+]
+
+[tool.taskipy.tasks]
+fix = "ruff check . --fix && ruff format ."
+lint = "ruff check . && ruff format . --check && pyrefly check ."
