@@ -324,6 +324,83 @@ footer = "Texto do rodapé"
 """
 footer = "Com footer"
 
+# ── Slide: Grid System - 2 Colunas ───────────────────────────────
+[[slides]]
+layout = "default"
+background = "blue"
+title = "Sistema de Grid - 2 Colunas"
+vertical_align = "top"
+content = """
+Organize conteúdo em layouts de grid flexíveis:
+
+::: grid
+::: card
+### Coluna 1
+- Item A
+- Item B
+- Item C
+:::
+::: card
+### Coluna 2
+- Item X
+- Item Y
+- Item Z
+:::
+:::
+"""
+
+# ── Slide: Grid System - 3 Colunas ───────────────────────────────
+[[slides]]
+layout = "default"
+background = "green"
+title = "Sistema de Grid - 3 Colunas"
+vertical_align = "top"
+content = """
+::: grid cols-3
+::: card
+### Recurso 1
+Markdown completo
+:::
+::: card
+### Recurso 2
+Syntax highlighting
+:::
+::: card
+### Recurso 3
+Diagramas Mermaid
+:::
+:::
+"""
+
+# ── Slide: Grid System - 4 Colunas ───────────────────────────────
+[[slides]]
+layout = "default"
+background = "lavender"
+title = "Grid com 4 Colunas"
+vertical_align = "top"
+content = """
+::: grid cols-4
+::: card
+**CLI**
+Typer moderno
+:::
+::: card
+**Cores**
+6 opções
+:::
+::: card
+**Export**
+PDF/PNG
+:::
+::: card
+**Live**
+Hot reload
+:::
+:::
+
+Perfeito para organizar informações de forma visual!
+"""
+
 # ── Slide: Summary de Funcionalidades ──────────────────────────
 [[slides]]
 layout = "summary"

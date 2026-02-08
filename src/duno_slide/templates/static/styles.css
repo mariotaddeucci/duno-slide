@@ -388,6 +388,71 @@ html, body {
     margin: 1rem 0;
 }
 
+/* ===== Grid System ===== */
+.slide-default .slide-content .grid {
+    display: grid;
+    gap: 20px;
+    margin-bottom: 1rem;
+}
+
+.slide-default .slide-content .grid-cols-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.slide-default .slide-content .grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.slide-default .slide-content .grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.slide-default .slide-content .grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.slide-default .slide-content .grid-card {
+    background-color: rgba(0, 0, 0, 0.05);
+    border: 2px solid #2d2d2d;
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.slide-default .slide-content .grid-card > *:last-child {
+    margin-bottom: 0;
+}
+
+.slide-default .slide-content .grid-card h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    margin-top: 0;
+}
+
+.slide-default .slide-content .grid-card h4 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    margin-top: 0;
+}
+
+.slide-default .slide-content .grid-card p {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.slide-default .slide-content .grid-card ul,
+.slide-default .slide-content .grid-card ol {
+    margin-bottom: 0.5rem;
+}
+
+.slide-default .slide-content .grid-card li {
+    font-size: 1.1rem;
+    margin-bottom: 0.3rem;
+}
+
 /* ===== Print Styles ===== */
 
 /* ===== Summary Layout ===== */
