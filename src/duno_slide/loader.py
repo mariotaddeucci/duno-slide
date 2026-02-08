@@ -134,14 +134,17 @@ def _process_grid_card_markdown(html: str) -> str:
     # Find all grid-card divs and convert their markdown content
     pattern = r'<div class="grid-card">\s*(.*?)\s*</div>'
 
+    # Create a single markdown instance to reuse
+    md = markdown.Markdown(
+        extensions=MD_EXTENSIONS,
+        extension_configs=MD_EXTENSION_CONFIGS,
+    )
+
     def convert_card_content(match: re.Match) -> str:
         content = match.group(1)
-        # If content looks like markdown (has ### or - ), convert it
-        if "###" in content or "\n- " in content or "\n* " in content:
-            md = markdown.Markdown(
-                extensions=MD_EXTENSIONS,
-                extension_configs=MD_EXTENSION_CONFIGS,
-            )
+        # If content doesn't contain HTML tags, it's likely markdown
+        if not re.search(r"<[^>]+>", content):
+            md.reset()  # Reset the parser state
             converted = md.convert(content)
             return f'<div class="grid-card">{converted}</div>'
         return match.group(0)
