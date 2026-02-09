@@ -309,6 +309,48 @@ html, body {
     padding: 0;
 }
 
+/* ===== TOML Syntax Highlighting Overrides ===== */
+/* Section headers: [presentation], [[slides]] */
+.slide-default .slide-content pre code.hljs .hljs-section {
+    color: #FF79C6;
+    font-weight: 700;
+    font-size: 1.1em;
+}
+
+/* Attribute keys: title, layout, background */
+.slide-default .slide-content pre code.hljs .hljs-attr {
+    color: #8BE9FD;
+    font-weight: 500;
+}
+
+/* String values */
+.slide-default .slide-content pre code.hljs .hljs-string {
+    color: #F1FA8C;
+}
+
+/* Literals: true, false */
+.slide-default .slide-content pre code.hljs .hljs-literal {
+    color: #BD93F9;
+    font-weight: 600;
+}
+
+/* Numbers */
+.slide-default .slide-content pre code.hljs .hljs-number {
+    color: #BD93F9;
+}
+
+/* Comments */
+.slide-default .slide-content pre code.hljs .hljs-comment {
+    color: #6272A4;
+    font-style: italic;
+}
+
+/* Operators like = */
+.slide-default .slide-content pre code.hljs .hljs-punctuation,
+.slide-default .slide-content pre code.hljs .hljs-operator {
+    color: #FF79C6;
+}
+
 /* Lists */
 .slide-default .slide-content ul,
 .slide-default .slide-content ol {
