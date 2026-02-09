@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width={{ slide_width | default(1280) }}">
     <title>{{ title | default("Fast Slide") }}</title>
-    <link rel="stylesheet" href="{{ highlight_css_url }}">
+    <link rel="stylesheet" href="{{ static_url }}/vendor/highlightjs/github-dark.min.css">
     <style>
 {{ inline_css | safe }}
     </style>
@@ -23,13 +23,13 @@
             {% endif %}
         {% endfor %}
     </div>
-    <script src="{{ highlight_js_url }}"></script>
+    <script src="{{ static_url }}/vendor/highlightjs/highlight.min.js"></script>
     <script>
 hljs.configure({ ignoreUnescapedHTML: true });
 hljs.highlightAll();
     </script>
-    <script type="module">
-import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+    <script src="{{ static_url }}/vendor/mermaid/mermaid.min.js"></script>
+    <script>
 mermaid.initialize({
     startOnLoad: true,
     theme: 'default',
