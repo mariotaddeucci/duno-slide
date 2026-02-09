@@ -306,6 +306,46 @@ content = """
 ```
 """
 
+
+# ── Slide 15: Grid Com Diagrama e Linguagem ───────────────────────────────
+[[slides]]
+layout = "default"
+background = "blue"
+title = "Sistema de Grid - 2 Colunas"
+vertical_align = "top"
+content = """
+Organize conteúdo em layouts de grid flexíveis:
+
+::: grid
+::: card
+
+### Coluna 1.
+
+```yaml
+presentation:
+  title: duno-slide
+  aspect_ratio: 16:9
+slides:
+  - layout: default
+    background: blue
+```
+:::
+::: card
+
+### Coluna 2.
+
+```mermaid
+graph TD
+    A[Arquivo TOML] -->|duno-slide| B(Servidor Local)
+    B --> C{Navegador}
+    A -->|render| D[HTML Standalone]
+    A -->|export| E[PDF / PNG]
+    C -->|Apresentar| F[🎉 Sucesso]
+```
+:::
+:::
+"""
+
 # ── Slide: Footer (sem título) ───────────────────────────────
 [[slides]]
 layout = "default"
