@@ -163,6 +163,7 @@ def load_presentation(file_path: str | Path) -> Presentation:
 
     title = data.get("title", "Untitled Presentation")
     aspect_ratio = data.get("aspect_ratio", "16:9")
+    theme = data.get("theme", "dunossauro")
     raw_slides = data.get("slides", [])
 
     slides = []
@@ -171,4 +172,6 @@ def load_presentation(file_path: str | Path) -> Presentation:
             raw["content"] = _render_markdown(raw["content"])
         slides.append(raw)
 
-    return Presentation(title=title, aspect_ratio=aspect_ratio, slides=slides)
+    return Presentation(
+        title=title, aspect_ratio=aspect_ratio, theme=theme, slides=slides
+    )

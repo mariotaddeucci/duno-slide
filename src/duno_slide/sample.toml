@@ -1,5 +1,6 @@
 title = "duno-slide — Apresentação de Exemplo"
 aspect_ratio = "16:9"
+theme = "dunossauro"
 
 # ── Slide 1: Capa ──────────────────────────────────────────────
 [[slides]]

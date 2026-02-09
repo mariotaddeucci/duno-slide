@@ -4,9 +4,7 @@ from pathlib import Path
 from jinja2 import Environment, FileSystemLoader
 
 from duno_slide.layout import Presentation
-
-TEMPLATES_DIR = Path(__file__).parent / "templates"
-STATIC_DIR = TEMPLATES_DIR / "static"
+from duno_slide.themes.manager import get_theme_static_dir, get_theme_templates_dir
 
 ASPECT_RATIOS = {
     "16:9": {"width": 1280, "height": 720},
@@ -14,8 +12,9 @@ ASPECT_RATIOS = {
 }
 
 
-def _load_css(aspect_ratio: str) -> str:
-    css_path = STATIC_DIR / "styles.css"
+def _load_css(aspect_ratio: str, theme: str) -> str:
+    static_dir = get_theme_static_dir(theme)
+    css_path = static_dir / "styles.css"
     css = css_path.read_text(encoding="utf-8")
 
     dims = ASPECT_RATIOS[aspect_ratio]
@@ -30,13 +29,14 @@ def _load_css(aspect_ratio: str) -> str:
 
 
 def render_presentation(presentation: Presentation) -> str:
+    templates_dir = get_theme_templates_dir(presentation.theme)
     env = Environment(
-        loader=FileSystemLoader(str(TEMPLATES_DIR)),
+        loader=FileSystemLoader(str(templates_dir)),
         autoescape=True,
     )
     template = env.get_template("base.html")
 
-    inline_css = _load_css(presentation.aspect_ratio)
+    inline_css = _load_css(presentation.aspect_ratio, presentation.theme)
     highlight_css_url = "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
     highlight_js_url = (
         "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"
@@ -57,6 +57,7 @@ def render_presentation(presentation: Presentation) -> str:
 
 class SlideHTTPHandler(SimpleHTTPRequestHandler):
     presentation_path: Path | None = None
+    theme_override: str | None = None
 
     def do_GET(self):
         if self.presentation_path is None:
@@ -70,6 +71,10 @@ class SlideHTTPHandler(SimpleHTTPRequestHandler):
             from duno_slide.loader import load_presentation
 
             presentation = load_presentation(self.presentation_path)
+            if self.theme_override:
+                presentation = presentation.model_copy(
+                    update={"theme": self.theme_override}
+                )
             html = render_presentation(presentation=presentation)
             self.send_response(200)
             self.send_header("Content-Type", "text/html; charset=utf-8")
@@ -87,8 +92,10 @@ def serve(
     file: Path,
     host: str = "localhost",
     port: int = 8765,
+    theme_override: str | None = None,
 ):
     SlideHTTPHandler.presentation_path = file
+    SlideHTTPHandler.theme_override = theme_override
 
     server = HTTPServer((host, port), SlideHTTPHandler)
     print(f"Serving presentation at http://{host}:{port}")
