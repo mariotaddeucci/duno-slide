@@ -582,6 +582,7 @@ html, body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    max-height: 30%;
 }
 
 .slide-summary-item.summary-item-empty {
