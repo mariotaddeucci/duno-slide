@@ -1,9 +1,8 @@
 import threading
-from http.server import HTTPServer
 from pathlib import Path
 
 from duno_slide.loader import load_presentation
-from duno_slide.server import ASPECT_RATIOS, SlideHTTPHandler, render_presentation
+from duno_slide.server import ASPECT_RATIOS, create_app
 
 
 def export_presentation(
@@ -22,19 +21,31 @@ def export_presentation(
             "Install it with: pip install playwright && playwright install chromium"
         )
 
+    import uvicorn
+
     presentation = load_presentation(file)
-    html = render_presentation(presentation)
 
     dims = ASPECT_RATIOS[presentation.aspect_ratio]
     vw = width or dims["width"]
     vh = height or dims["height"]
 
-    # Serve temporarily on a random port
-    SlideHTTPHandler.html_content = html
-    server = HTTPServer(("127.0.0.1", 0), SlideHTTPHandler)
-    port = server.server_address[1]
-    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    # Serve temporarily using FastAPI
+    app = create_app(file)
+    config = uvicorn.Config(app, host="127.0.0.1", port=0, log_level="error")
+    server = uvicorn.Server(config)
+
+    # Use a thread to run the server
+    thread = threading.Thread(target=server.run, daemon=True)
     thread.start()
+
+    # Wait for server to start
+    import time
+
+    while not server.started:
+        time.sleep(0.1)
+
+    # Get the actual port
+    port = server.servers[0].sockets[0].getsockname()[1]
 
     try:
         with sync_playwright() as p:
@@ -70,4 +81,4 @@ def export_presentation(
 
             browser.close()
     finally:
-        server.shutdown()
+        server.should_exit = True

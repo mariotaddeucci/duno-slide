@@ -1,6 +1,9 @@
-from http.server import HTTPServer, SimpleHTTPRequestHandler
 from pathlib import Path
 
+import uvicorn
+from fastapi import FastAPI
+from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
 from jinja2 import Environment, FileSystemLoader
 
 from duno_slide.layout import Presentation
@@ -12,7 +15,7 @@ ASPECT_RATIOS = {
 }
 
 
-def _load_css(aspect_ratio: str, theme: str) -> str:
+def _load_css(aspect_ratio: str, theme: str, static_url: str = "/static") -> str:
     static_dir = get_theme_static_dir(theme)
     css_path = static_dir / "styles.css"
     css = css_path.read_text(encoding="utf-8")
@@ -25,10 +28,13 @@ def _load_css(aspect_ratio: str, theme: str) -> str:
     css = css.replace("height: 768px;", f"height: {h}px;")
     css = css.replace("size: 1024px 768px;", f"size: {w}px {h}px;")
 
+    # Rewrite relative url() references to use the static URL prefix
+    css = css.replace("url('vendor/", f"url('{static_url}/vendor/")
+
     return css
 
 
-def render_presentation(presentation: Presentation) -> str:
+def render_presentation(presentation: Presentation, static_url: str = "/static") -> str:
     templates_dir = get_theme_templates_dir(presentation.theme)
     env = Environment(
         loader=FileSystemLoader(str(templates_dir)),
@@ -36,56 +42,45 @@ def render_presentation(presentation: Presentation) -> str:
     )
     template = env.get_template("base.html")
 
-    inline_css = _load_css(presentation.aspect_ratio, presentation.theme)
-    highlight_css_url = "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
-    highlight_js_url = (
-        "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"
-    )
+    inline_css = _load_css(presentation.aspect_ratio, presentation.theme, static_url)
     dims = ASPECT_RATIOS[presentation.aspect_ratio]
 
     return template.render(
         title=presentation.title,
         slides=presentation.slides,
         inline_css=inline_css,
-        highlight_css_url=highlight_css_url,
-        highlight_js_url=highlight_js_url,
+        static_url=static_url,
         aspect_ratio=presentation.aspect_ratio,
         slide_width=dims["width"],
         slide_height=dims["height"],
     )
 
 
-class SlideHTTPHandler(SimpleHTTPRequestHandler):
-    presentation_path: Path | None = None
-    theme_override: str | None = None
+def create_app(
+    file: Path,
+    theme_override: str | None = None,
+) -> FastAPI:
+    app = FastAPI()
 
-    def do_GET(self):
-        if self.presentation_path is None:
-            self.send_response(500)
-            self.send_header("Content-Type", "text/plain; charset=utf-8")
-            self.end_headers()
-            self.wfile.write(b"Presentation path not configured.")
-            return
+    from duno_slide.loader import load_presentation
 
-        try:
-            from duno_slide.loader import load_presentation
+    presentation = load_presentation(file)
+    if theme_override:
+        presentation = presentation.model_copy(update={"theme": theme_override})
 
-            presentation = load_presentation(self.presentation_path)
-            if self.theme_override:
-                presentation = presentation.model_copy(
-                    update={"theme": self.theme_override}
-                )
-            html = render_presentation(presentation=presentation)
-            self.send_response(200)
-            self.send_header("Content-Type", "text/html; charset=utf-8")
-            self.end_headers()
-            self.wfile.write(html.encode("utf-8"))
-        except Exception as exc:
-            self.send_response(500)
-            self.send_header("Content-Type", "text/plain; charset=utf-8")
-            self.end_headers()
-            message = f"Failed to load presentation: {exc}"
-            self.wfile.write(message.encode("utf-8"))
+    static_dir = get_theme_static_dir(presentation.theme)
+    app.mount("/static", StaticFiles(directory=str(static_dir)), name="static")
+
+    @app.get("/", response_class=HTMLResponse)
+    def index():
+        reloaded = load_presentation(file)
+        if theme_override:
+            current = reloaded.model_copy(update={"theme": theme_override})
+        else:
+            current = reloaded
+        return render_presentation(presentation=current, static_url="/static")
+
+    return app
 
 
 def serve(
@@ -94,14 +89,7 @@ def serve(
     port: int = 8765,
     theme_override: str | None = None,
 ):
-    SlideHTTPHandler.presentation_path = file
-    SlideHTTPHandler.theme_override = theme_override
-
-    server = HTTPServer((host, port), SlideHTTPHandler)
+    app = create_app(file, theme_override=theme_override)
     print(f"Serving presentation at http://{host}:{port}")
     print("Press Ctrl+C to stop.")
-    try:
-        server.serve_forever()
-    except KeyboardInterrupt:
-        print("\nServer stopped.")
-        server.server_close()
+    uvicorn.run(app, host=host, port=port, log_level="warning")
