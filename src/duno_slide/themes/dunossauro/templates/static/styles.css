@@ -201,6 +201,7 @@ html, body {
     display: flex;
     flex-direction: column;
     position: relative;
+    max-height: 100%;
 }
 
 /* Header bar */
@@ -287,7 +288,6 @@ html, body {
     font-size: 0.95rem;
     line-height: 1.6;
     margin-bottom: 1rem;
-    overflow-x: auto;
 }
 
 .slide-default .slide-content pre.mermaid {
@@ -458,7 +458,6 @@ html, body {
 }
 
 .slide-default .slide-content .grid-card {
-    border-radius: 8px;
     display: flex;
     flex-direction: column;
 }
@@ -511,6 +510,7 @@ html, body {
     display: flex;
     flex-direction: column;
     position: relative;
+    max-height: 100%;
 }
 
 /* Reuse header styles from default */
