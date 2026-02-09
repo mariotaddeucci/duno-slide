@@ -79,3 +79,4 @@ class Presentation(BaseModel):
     title: str
     slides: list[SlideLayout]
     aspect_ratio: TAspectRatio = "16:9"
+    theme: str = "dunossauro"

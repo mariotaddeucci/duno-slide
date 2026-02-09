@@ -56,12 +56,16 @@ def host(
 def sample(
     port: Annotated[int, typer.Option(help="Porta para servir.")] = 8765,
     bind: Annotated[str, typer.Option(help="Endereço para bind.")] = "localhost",
+    theme: Annotated[
+        Optional[str],
+        typer.Option(help="Tema da apresentação de exemplo."),
+    ] = None,
 ):
     """Serve a apresentação de exemplo embutida."""
     from duno_slide.server import serve
 
     sample_file = Path(__file__).parent / "sample.toml"
-    serve(sample_file, host=bind, port=port)
+    serve(sample_file, host=bind, port=port, theme_override=theme)
 
 
 @app.command()
